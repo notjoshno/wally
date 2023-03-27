@@ -1,11 +1,11 @@
 steps:
   # Build the container image
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/gamefam-index-demo/wally-backend:$COMMIT_SHA', '-f', 'wally-registry-backend/Dockerfile', '.']
+    args: ['build', '-t', 'gcr.io/notjoshno-wally-registry/Dockerfile', '.']
 
   # Push the container image to Container Registry
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/gamefam-index-demo/wally-backend:$COMMIT_SHA']
+    args: ['push', 'gcr.io/notjoshno-wally-registry/wally-backend:$COMMIT_SHA']
 
   # Deploy container image to Cloud Run
   - name: "gcr.io/cloud-builders/gcloud"
@@ -15,7 +15,7 @@ steps:
         "deploy",
         "wally-backend",
         "--image",
-        "gcr.io/gamefam-index-demo/wally-backend:$COMMIT_SHA",
+        "gcr.io/notjoshno-wally-registry/wally-backend:$COMMIT_SHA",
         "--region",
         "us-central1",
         "--platform",
